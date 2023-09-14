@@ -9,7 +9,7 @@
 ################################################################################
  
 package Apache::Ocsinventory::Plugins::Winupdate::Map;
- 
+package Apache::Ocsinventory::Plugins::winupdatelastscan::Map;
 use strict;
  
 use Apache::Ocsinventory::Map;
@@ -30,6 +30,9 @@ $DATA_MAP{winupdatestate} = {
 			STATUS => {},
 			SUPPORTLINK => {},
 			DESCRIPTION => {},
+			LASTSCANDATE => {},
+			LASTINSTALLATIONDATE => {},
+		
 	    }
 };
 1;

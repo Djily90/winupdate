@@ -19,8 +19,11 @@ function extension_install_winupdate()
                               `STATUS` VARCHAR(255) DEFAULT NULL,
                               `SUPPORTLINK` VARCHAR(255) DEFAULT NULL,
                               `DESCRIPTION` VARCHAR(255) DEFAULT NULL,
+                              `LASTSCANDATE` VARCHAR(255) DEFAULT NULL,
+                              `LASTINSTALLATIONDATE` VARCHAR(255) DEFAULT NULL,
                               PRIMARY KEY  (`ID`,`HARDWARE_ID`)
                             ) ENGINE=INNODB ;");
+
 }
 
 /**

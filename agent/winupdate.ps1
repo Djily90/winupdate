@@ -40,9 +40,13 @@ foreach ($Update in $UpdateHistory) {
         $xml += "<STATUS>" + $stat + "</STATUS>`n"
         $xml += "<SUPPORTLINK>" + $Update.SupportUrl + "</SUPPORTLINK>`n"
         $xml += "<DESCRIPTION>" + $Update.Description + "</DESCRIPTION>`n"
+        $xml += "<LASTSCANDATE> </LASTSCANDATE>`n"
+        $xml += "<LASTINSTALLATIONDATE> </LASTINSTALLATIONDATE>`n"
         $xml += "</WINUPDATESTATE>`n"
     } 
 }
+
+
 
 
 $hotfixes = Get-HotFix | ForEach-Object {
@@ -55,9 +59,26 @@ $hotfixes = Get-HotFix | ForEach-Object {
         $xml += "<STATUS>" + "Succeeded" + "</STATUS>`n"
         $xml += "<SUPPORTLINK> </SUPPORTLINK>`n"
         $xml += "<DESCRIPTION>" + $_.Description + "</DESCRIPTION>`n"
+        $xml += "<LASTSCANDATE> </LASTSCANDATE>`n"
+        $xml += "<LASTINSTALLATIONDATE> </LASTINSTALLATIONDATE>`n"
         $xml += "</WINUPDATESTATE>`n"
 	}
 }
+
+$checkUpdate = (New-Object -com "Microsoft.Update.AutoUpdate").Results | ForEach-Object {
+		$xml += "<WINUPDATESTATE>`n"
+        $xml += "<KB> </KB>`n"
+        $xml += "<TITLE>" + "Last scan" + "</TITLE>`n"
+        $xml += "<DATE> </DATE>`n"
+        $xml += "<OPERATION> </OPERATION>`n"
+        $xml += "<STATUS> </STATUS>`n"
+        $xml += "<SUPPORTLINK> </SUPPORTLINK>`n"
+        $xml += "<DESCRIPTION> </DESCRIPTION>`n"
+        $xml += "<LASTSCANDATE>" + $_.LastSearchSuccessDate + "</LASTSCANDATE>`n"
+        $xml += "<LASTINSTALLATIONDATE>" + $_.LastInstallationSuccessDate + "</LASTINSTALLATIONDATE>`n"
+        $xml += "</WINUPDATESTATE>`n"
+}
+
 
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 [Console]::WriteLine($xml)
